@@ -36,9 +36,9 @@ module.exports = {
       : 'No players online';
 
     const statusMessage = `**Server is online!** 🟢
-**Players (${playersCount}):**
+👥 **Players (${playersCount}):**
 ${playerNames}
-**Uptime:**
+⏳ **Uptime:**
 ${uptime}`;
 
     await interaction.editReply(statusMessage);
