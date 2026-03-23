@@ -35,18 +35,11 @@ module.exports = {
       ? status.sample.map(p => p.name).join(', ')
       : 'No players online';
 
-    const statusMessage = `
-🟢 **Server is Online**
-
-**MOTD:**
-${status.motd}
-
-**Players:** (${playersCount})
+    const statusMessage = `**Server is online!** 🟢
+**Players (${playersCount}):**
 ${playerNames}
-
 **Uptime:**
-${uptime}
-    `;
+${uptime}`;
 
     await interaction.editReply(statusMessage);
   },
