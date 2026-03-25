@@ -18,6 +18,8 @@ module.exports = {
   async execute(interaction) {
     if (!interaction.isChatInputCommand()) return;
 
+    logger.info(`Received command: /${interaction.commandName} from ${interaction.user.tag}`);
+
     const command = interaction.client.commands.get(interaction.commandName);
 
     if (!command) {

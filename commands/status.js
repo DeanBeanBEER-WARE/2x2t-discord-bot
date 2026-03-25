@@ -35,7 +35,17 @@ module.exports = {
       ? `👥 ${status.sample.map(p => p.name).join(', ')}`
       : '👥 No players online';
 
-    const motd = status.motd && status.motd.clean ? status.motd.clean : 'No MOTD available';
+    let motd = 'No MOTD available';
+    if (status.motd) {
+      if (typeof status.motd === 'string') {
+        motd = status.motd;
+      } else if (status.motd.clean) {
+        motd = status.motd.clean;
+      } else if (status.motd.raw) {
+        // Strip out Minecraft color codes (e.g. §c, §l) from raw string if clean isn't available
+        motd = status.motd.raw.replace(/§[0-9a-fk-or]/g, '').trim();
+      }
+    }
 
     const statusMessage = `📊 Server Status
 🟢 Players: ${playersCount}
