@@ -8,6 +8,11 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { getServerStatus, getUptime } = require('../utils/mcServer');
 
+function stripMotdPrefix(motd) {
+  if (typeof motd !== 'string') return motd;
+  return motd.replace(/^\s*2X2T\s*/i, '').trim();
+}
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('status')
@@ -38,12 +43,12 @@ module.exports = {
     let motd = 'No MOTD available';
     if (status.motd) {
       if (typeof status.motd === 'string') {
-        motd = status.motd;
+        motd = stripMotdPrefix(status.motd);
       } else if (status.motd.clean) {
-        motd = status.motd.clean;
+        motd = stripMotdPrefix(status.motd.clean);
       } else if (status.motd.raw) {
         // Strip out Minecraft color codes (e.g. §c, §l) from raw string if clean isn't available
-        motd = status.motd.raw.replace(/§[0-9a-fk-or]/g, '').trim();
+        motd = stripMotdPrefix(status.motd.raw.replace(/§[0-9a-fk-or]/g, '').trim());
       }
     }
 
