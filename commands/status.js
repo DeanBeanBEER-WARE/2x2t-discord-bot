@@ -32,8 +32,8 @@ module.exports = {
 
     const playersCount = `${status.players}/${status.maxPlayers}`;
     const playerNames = status.sample.length > 0
-      ? `👥 ${status.sample.map(p => p.name).join(', ')}`
-      : '👥 No players online';
+      ? `**👥 Online Players:** ${status.sample.map(p => p.name).join(', ')}`
+      : '**👥 Online Players:** No players online';
 
     let motd = 'No MOTD available';
     if (status.motd) {
@@ -48,11 +48,11 @@ module.exports = {
     }
 
     const statusMessage = `📊 Server Status
-🟢 Players: ${playersCount}
+**🟢 Players:** ${playersCount}
 ${playerNames}
 
-📝 MOTD: ${motd}
-⏱ Uptime: ${uptime}`;
+**📝 MOTD:** ${motd}
+**⏱️ Uptime:** ${uptime}`;
 
     await interaction.editReply(statusMessage);
   },
